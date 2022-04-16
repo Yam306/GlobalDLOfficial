@@ -4,7 +4,7 @@ A Global Media Downloader Supporting All Sites Supported Explicitly by YT-DL and
 # Uses of GlobalDL
 - GlobalDL is a very versatile media downloader
 - GlobalDL can be used to effectivley download video/audio from ANY site supported by YT-DL officially [https://ytdl-org.github.io/youtube-dl/supportedsites.html]
-- However GlobalDL can also download media from any site on the internet that has HTML, including downloading IMAGES [which yt-dl by itself cannot do]
+- GlobalDL can also download any media form from any site on the internet that has HTML, including downloading IMAGES and TEXT [which yt-dl by itself cannot do]
 - GlobalDL uses the HTML to download realtive filetypes and HTML headers from the target site
 - Although GlobalDL can be used to download from almost any site ONLY USE IT ON SITES THAT PERMIT YOU TO DOWNLOAD FROM THEM
 - This software [GlobalDL] is NOT to be used for malicious or illegal intent
