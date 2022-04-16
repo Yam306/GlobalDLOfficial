@@ -5,6 +5,7 @@ def yttitlecleaner(page_title, inputlocal):
     page_title = str(page_title).strip()
     page_title = page_title.encode('ascii', 'ignore')
     page_title = page_title.decode('ascii')
+    #not allowed in windows:
     page_title = page_title.replace('<','')
     page_title = page_title.replace('>','')
     page_title = page_title.replace(':','')
