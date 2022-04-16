@@ -19,3 +19,10 @@ Check: https://ffmpeg.org/ for specifics or problems installing
 8. Locate PATH variable and click it
 9. Click "New" and add ffmpeg to system enviornment variables -> "C:\ffmpeg\bin"
 10. Check ffmpeg has been added to system enviornment variables by typing ffmpeg in command prompt
+
+# Usage of Global DL
+- Locate where the main "Global DL" file was saved
+- Open a CMD prompt at the location (type cmd in filepath at the top of file explorer)
+- Type "python main.py [Output File Save Location] [YT-DL Accepted Site List txt File Location]"
+- For YT-DL Accepted Site List go to: https://ytdl-org.github.io/youtube-dl/supportedsites.html and enter any you want to be able to download from in sites.txt
+- Follow prompts in program
