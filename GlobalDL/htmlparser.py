@@ -5,7 +5,7 @@ import listdownloader
 #Parses html input from linkretriever
 
 def soupobj(htmlcontent,inputlocal,inputurl):
-    soupobj = bs4.BeautifulSoup(htmlcontent, "html.parser") #gets soup object from HTML content that is input from linkretriever
+    soupobj = bs4.BeautifulSoup(htmlcontent, "html.parser")
 
     title_tag = soupobj.find("title").text
 
@@ -25,30 +25,20 @@ def soupobj(htmlcontent,inputlocal,inputurl):
     return soupobj
 
 def parsehtml(soupobj):
-    #each of the following should return lists of the content they are designated to find
-
-    #hyperlink tag:a list
     a_tag = soupobj.find_all("a")
 
-    #paragraph tag:text
     p_tag = soupobj.find_all("p")
 
-    #block text tag:blockquote
     block_quote_tag = soupobj.find_all("blockquote")
 
-    #img tag:img list
     img_tag = soupobj.find_all("img")
 
-    #video tag:video list MUST USE SOURCE TAG TO GET ACTUAL FILE
     video_tag = soupobj.find_all("video")
 
-    #audio tag:audio list MUST USE SOURCE TAG TO GET ACTUAL FILE
     audio_tag = soupobj.find_all("audio")
 
-    #article tag:article list
     article_tag = soupobj.find_all("article")
 
-    #title tag:title list MUST USE SOURCE TAG TO GET ACTUAL FILE
     title_tag = soupobj.find("title").text
 
     return(title_tag,p_tag,a_tag,img_tag,video_tag,audio_tag,article_tag,block_quote_tag)
@@ -62,10 +52,10 @@ def listrefiner(p_tag,a_tag,img_tag,video_tag,audio_tag,article_tag,block_quote_
         except:
             continue
 
-    block_quote_list = []    #Not Working
-    for block_quote in block_quote_list:
+    block_quote_list = []   
+    for block_quote in block_quote_tag:
         try:
-            block_quote_list.append(block_quote)
+            block_quote_list.append(block_quote.text)
         except:
             continue
 

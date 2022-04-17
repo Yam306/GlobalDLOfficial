@@ -56,20 +56,17 @@ headers_list = [
 }
 ]
 
-def urlformattask(url): #should simply retrieve the website with appropriate headers
+def urlformattask(url):
     url = str(url).strip()
-    scheme_split = url.split('//')
-    domain_split = scheme_split[1].split('/')
-    host_name = domain_split[0].replace('www','')
     return url
 
 def urlchecktask(url):
-    headers = random.choice(headers_list) #randomly choose header from list above
+    headers = random.choice(headers_list) 
     try:
-        request_obj = requests.get(url, headers=headers) #get the requested URL with appropriate chrome headers
+        request_obj = requests.get(url, headers=headers) 
         request_obj.encoding = 'utf-8'
         request_obj.raise_for_status()
-        return('Success',request_obj) #on success return url request object
+        return('Success',request_obj)
     except requests.exceptions.ConnectionError as request_error_obj:
         return('ConnectionError',request_error_obj)
     except requests.exceptions.HTTPError as request_error_obj:
@@ -81,14 +78,14 @@ def urlchecktask(url):
     except requests.exceptions.RequestException as request_error_obj:
         return('RequestException',request_error_obj)
 
-def errorchecktask(status,request_obj): #should check the site for errors
+def errorchecktask(status,request_obj): 
     if status != 'Success':
         return(status,request_obj)
     request_status_code = int(request_obj.status_code)
-    request_obj_content = request_obj.content #HTML site content
+    request_obj_content = request_obj.content 
 
     if request_status_code >= 100 and request_status_code <= 299:
-        return('Success',request_status_code,request_obj_content)  #0 = status, 1 = request status code, 2 = request content
+        return('Success',request_status_code,request_obj_content) 
     elif request_status_code >= 300 and request_status_code <= 399:
         return('Redirected',request_status_code)
     elif request_status_code >= 400 and request_status_code <= 499:

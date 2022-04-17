@@ -37,12 +37,12 @@ def page_title(page_title,inputurl):
     page_title = page_title.replace(' ','')
     page_title = page_title.replace('!','')
     page_title = page_title.replace('-','')
-    page_title = page_title.replace(r"'",'')
-    page_title = page_title.strip('\"')
-    page_title = page_title.strip('\'')
+    page_title = page_title.replace("'",'')
     page_title = page_title.replace(' ','')
     page_title = page_title.replace(' - ','.')
     page_title = page_title.replace('=','.')
+    page_title = page_title.strip('\"')
+    page_title = page_title.strip('\'')
 
     return page_title
 

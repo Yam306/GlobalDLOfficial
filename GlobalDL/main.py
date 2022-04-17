@@ -2,8 +2,10 @@ import linkretriever
 import htmlparser
 import listdownloader
 import ytdlpfork
+import pathlib
 import time
 import sys
+import os
 
 def main(inputlocal,inputurlchoice,ytdl_sites_list):
     print('')
@@ -76,7 +78,7 @@ def main(inputlocal,inputurlchoice,ytdl_sites_list):
     video_tag = htmlparser.parsehtml(soupobj)[4]
     audio_tag = htmlparser.parsehtml(soupobj)[5]
     article_tag = htmlparser.parsehtml(soupobj)[6]
-    block_quote_tag = htmlparser.parsehtml(soupobj)[7] #NOT USED
+    block_quote_tag = htmlparser.parsehtml(soupobj)[7]
 
     #Get Page Lists
     paragraph_list = htmlparser.listrefiner(p_tag,a_tag,img_tag,video_tag,audio_tag,article_tag,block_quote_tag)[0]
@@ -85,7 +87,7 @@ def main(inputlocal,inputurlchoice,ytdl_sites_list):
     video_source_list = htmlparser.listrefiner(p_tag,a_tag,img_tag,video_tag,audio_tag,article_tag,block_quote_tag)[3]
     audio_source_list = htmlparser.listrefiner(p_tag,a_tag,img_tag,video_tag,audio_tag,article_tag,block_quote_tag)[4]
     article_list = htmlparser.listrefiner(p_tag,a_tag,img_tag,video_tag,audio_tag,article_tag,block_quote_tag)[5]
-    #block_quote_list = htmlparser.listrefiner(p_tag,a_tag,img_tag,video_tag,audio_tag,article_tag,block_quote_tag)[6]
+    block_quote_list = htmlparser.listrefiner(p_tag,a_tag,img_tag,video_tag,audio_tag,article_tag,block_quote_tag)[6]
 
     #Clean Page Lists
     cleaned_paragraph_list = listdownloader.url_cleaner(paragraph_list,inputurl)
@@ -94,7 +96,7 @@ def main(inputlocal,inputurlchoice,ytdl_sites_list):
     cleaned_video_source_list = listdownloader.url_cleaner(video_source_list,inputurl)
     cleaned_audio_source_list = listdownloader.url_cleaner(audio_source_list,inputurl)
     cleaned_article_list = listdownloader.url_cleaner(article_list,inputurl)
-    #cleaned_block_quote_list = listdownloader.url_cleaner(block_quote_list,inputurl)
+    cleaned_block_quote_list = listdownloader.url_cleaner(block_quote_list,inputurl)
 
     #Clean Page Title
     cleaned_page_title = listdownloader.page_title(page_title,inputurl)
@@ -108,8 +110,11 @@ def main(inputlocal,inputurlchoice,ytdl_sites_list):
     print('Videos : 4')
     print('Audio : 5')
     print('Articles : 6')
-    print('All : 7')
+    print('Block Quote : 7')
+    print('All : 8')
     listdownloaderchoice = input('Enter Corresponding Number For Desired Output: ')
+    if listdownloaderchoice == '':
+        listdownloaderchoice = 8
     listdownloaderchoice = int(listdownloaderchoice)
 
     #Download Page Links Choice:
@@ -125,6 +130,8 @@ def main(inputlocal,inputurlchoice,ytdl_sites_list):
         listdownloader.downloader(cleaned_audio_source_list, inputlocal, cleaned_page_title, 'Audio')
     elif listdownloaderchoice == 6:
         listdownloader.downloader(cleaned_article_list, inputlocal, cleaned_page_title, 'Article')
+    elif listdownloaderchoice == 7:
+        listdownloader.downloader(cleaned_block_quote_list, inputlocal, cleaned_page_title, 'BlockQuote')
     else:
         listdownloader.downloader(cleaned_paragraph_list, inputlocal, cleaned_page_title, 'Paragraph')
         listdownloader.downloader(cleaned_hyperlink_list, inputlocal, cleaned_page_title, 'Hyperlink')
@@ -132,7 +139,7 @@ def main(inputlocal,inputurlchoice,ytdl_sites_list):
         listdownloader.downloader(cleaned_video_source_list, inputlocal, cleaned_page_title, 'Video')
         listdownloader.downloader(cleaned_audio_source_list, inputlocal, cleaned_page_title, 'Audio')
         listdownloader.downloader(cleaned_article_list, inputlocal, cleaned_page_title, 'Article')
-        #listdownloader.downloader(cleaned_block_quote_list, inputlocal, cleaned_page_title, 'Block Quote')
+        listdownloader.downloader(cleaned_block_quote_list, inputlocal, cleaned_page_title, 'BlockQuote')
     print('''
 Done!
     ''')
@@ -142,26 +149,20 @@ if __name__ == "__main__":
     cmd_argument_length = int(len(sys.argv))
 
     if cmd_argument_length < 3:
-        print('Must Enter In Form: main.py [Out File Path] [Site List Path]')
+        print('Must Enter In Form: main.py [Site List Path]')
         exit()
 
-    cmd_argument_0 = sys.argv[0] #This is just the filename
-    cmd_argument_1 = sys.argv[1] #Input Save Location
-    cmd_argument_2 = sys.argv[2] #YT-DL Site List File Location
-    #cmd_argument_3 = sys.argv[3]
-    #cmd_argument_4 = sys.argv[4]
-    #cmd_argument_5 = sys.argv[5]
+    cmd_argument_0 = sys.argv[0] 
+    cmd_argument_1 = sys.argv[1] 
 
     print('''
 GlobalDL: A global site media downloader
 Created By: Yam306''')
-    #inputlocal = input('Enter download folder for content: ')
-    inputlocal = cmd_argument_1   #CMD ARG INPUT 1
+    inputlocal = str(os.path.join(pathlib.Path.home(), "Downloads")) #Input Save Location Default to Downloads
     inputlocal = str(inputlocal)
 
     ytdl_sites_list = []
-    #ytdl_sites_file = input('Enter the directory of sites accepted by yt-dl: ')
-    ytdl_sites_file = cmd_argument_2    #CMD ARG INPUT 2
+    ytdl_sites_file = cmd_argument_1
     with open(str(ytdl_sites_file),'r',encoding='utf-8') as file:
         lines = file.readlines()
 
