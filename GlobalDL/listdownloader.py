@@ -1,8 +1,11 @@
 import requests
 import os
 
-def url_cleaner(url_list,inputurl):
+def url_cleaner(url_list,inputurl,specification):
     cleaned_list = []
+    if specification == 'block_quote':
+        return url_list
+
     for url in url_list:
         url = str(url)
         ##################Enter Site Specifics Here##########################
