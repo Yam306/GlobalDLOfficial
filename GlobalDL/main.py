@@ -90,16 +90,16 @@ def main(inputlocal,inputurlchoice,ytdl_sites_list):
     block_quote_list = htmlparser.listrefiner(p_tag,a_tag,img_tag,video_tag,audio_tag,article_tag,block_quote_tag)[6]
 
     #Clean Page Lists
-    cleaned_paragraph_list = listdownloader.url_cleaner(paragraph_list,inputurl)
-    cleaned_hyperlink_list = listdownloader.url_cleaner(hyperlink_list,inputurl)
-    cleaned_image_list = listdownloader.url_cleaner(image_list,inputurl)
-    cleaned_video_source_list = listdownloader.url_cleaner(video_source_list,inputurl)
-    cleaned_audio_source_list = listdownloader.url_cleaner(audio_source_list,inputurl)
-    cleaned_article_list = listdownloader.url_cleaner(article_list,inputurl)
-    cleaned_block_quote_list = listdownloader.url_cleaner(block_quote_list,inputurl)
+    cleaned_paragraph_list = listdownloader.url_cleaner(paragraph_list,inputurl,'paragraph')
+    cleaned_hyperlink_list = listdownloader.url_cleaner(hyperlink_list,inputurl,'hyperlink')
+    cleaned_image_list = listdownloader.url_cleaner(image_list,inputurl,'image')
+    cleaned_video_source_list = listdownloader.url_cleaner(video_source_list,inputurl,'video')
+    cleaned_audio_source_list = listdownloader.url_cleaner(audio_source_list,inputurl,'audio')
+    cleaned_article_list = listdownloader.url_cleaner(article_list,inputurl,'article')
+    cleaned_block_quote_list = listdownloader.url_cleaner(block_quote_list,inputurl,'block_quote')
 
     #Clean Page Title
-    cleaned_page_title = listdownloader.page_title(page_title,inputurl)
+    cleaned_page_title = listdownloader.page_title(page_title)
 
     #Page DL Choices
     print('')
@@ -119,27 +119,27 @@ def main(inputlocal,inputurlchoice,ytdl_sites_list):
 
     #Download Page Links Choice:
     if listdownloaderchoice == 1:
-        listdownloader.downloader(cleaned_paragraph_list, inputlocal, cleaned_page_title, 'Paragraph')
+        listdownloader.downloader(cleaned_paragraph_list, inputlocal, cleaned_page_title, 'paragraph')
     elif listdownloaderchoice == 2:
-        listdownloader.downloader(cleaned_hyperlink_list, inputlocal, cleaned_page_title, 'Hyperlink')
+        listdownloader.downloader(cleaned_hyperlink_list, inputlocal, cleaned_page_title, 'hyperlink')
     elif listdownloaderchoice == 3:
-        listdownloader.downloader(cleaned_image_list, inputlocal, cleaned_page_title, 'Image')
+        listdownloader.downloader(cleaned_image_list, inputlocal, cleaned_page_title, 'image')
     elif listdownloaderchoice == 4:
-        listdownloader.downloader(cleaned_video_source_list, inputlocal, cleaned_page_title, 'Video')
+        listdownloader.downloader(cleaned_video_source_list, inputlocal, cleaned_page_title, 'video')
     elif listdownloaderchoice == 5:
-        listdownloader.downloader(cleaned_audio_source_list, inputlocal, cleaned_page_title, 'Audio')
+        listdownloader.downloader(cleaned_audio_source_list, inputlocal, cleaned_page_title, 'audio')
     elif listdownloaderchoice == 6:
-        listdownloader.downloader(cleaned_article_list, inputlocal, cleaned_page_title, 'Article')
+        listdownloader.downloader(cleaned_article_list, inputlocal, cleaned_page_title, 'article')
     elif listdownloaderchoice == 7:
-        listdownloader.downloader(cleaned_block_quote_list, inputlocal, cleaned_page_title, 'BlockQuote')
+        listdownloader.downloader(cleaned_block_quote_list, inputlocal, cleaned_page_title, 'block_quote')
     else:
-        listdownloader.downloader(cleaned_paragraph_list, inputlocal, cleaned_page_title, 'Paragraph')
-        listdownloader.downloader(cleaned_hyperlink_list, inputlocal, cleaned_page_title, 'Hyperlink')
-        listdownloader.downloader(cleaned_image_list, inputlocal, cleaned_page_title, 'Image')
-        listdownloader.downloader(cleaned_video_source_list, inputlocal, cleaned_page_title, 'Video')
-        listdownloader.downloader(cleaned_audio_source_list, inputlocal, cleaned_page_title, 'Audio')
-        listdownloader.downloader(cleaned_article_list, inputlocal, cleaned_page_title, 'Article')
-        listdownloader.downloader(cleaned_block_quote_list, inputlocal, cleaned_page_title, 'BlockQuote')
+        listdownloader.downloader(cleaned_paragraph_list, inputlocal, cleaned_page_title, 'paragraph')
+        listdownloader.downloader(cleaned_hyperlink_list, inputlocal, cleaned_page_title, 'hyperlink')
+        listdownloader.downloader(cleaned_image_list, inputlocal, cleaned_page_title, 'image')
+        listdownloader.downloader(cleaned_video_source_list, inputlocal, cleaned_page_title, 'video')
+        listdownloader.downloader(cleaned_audio_source_list, inputlocal, cleaned_page_title, 'audio')
+        listdownloader.downloader(cleaned_article_list, inputlocal, cleaned_page_title, 'article')
+        listdownloader.downloader(cleaned_block_quote_list, inputlocal, cleaned_page_title, 'block_quote')
     print('''
 Done!
     ''')

@@ -18,7 +18,7 @@ def url_cleaner(url_list,inputurl):
 
     return cleaned_list
 
-def page_title(page_title,inputurl):
+def page_title(page_title):
     page_title = str(page_title).strip()
     page_title = page_title.encode('ascii', 'ignore')
     page_title = page_title.decode('ascii')
@@ -72,6 +72,9 @@ def downloader(cleaned_url_list,inputlocation,page_title,specification):
 
         fulldllocal = str(dllocation+'\\'+filename)
 
+        if specification == 'block_quote':
+            continue
+
         try:
             print('')
             print(f'{str(i)}/{str(len(cleaned_url_list))} | Attempting DL for: {str(url)} at location: {fulldllocal}')
@@ -90,10 +93,9 @@ def downloader(cleaned_url_list,inputlocation,page_title,specification):
 
     with open(str(inputlocation+'\\'+str(page_title)+'\\'+str(specification)+'-'+str(page_title)+'.txt'), 'w', encoding='utf-8') as f:
         f.write(f'{str(specification)} Links For: {str(page_title)} \n')
-        f.close
 
     for url in cleaned_url_list:
         with open(str(inputlocation+'\\'+str(page_title)+'\\'+str(specification)+'-'+str(page_title)+'.txt'), 'a', encoding='utf-8') as f:
-            f.write(str(url)+'\n')
-            f.close
+            f.write('| '+str(url)+'\n')
+    f.close
             
