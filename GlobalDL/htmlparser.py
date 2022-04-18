@@ -9,7 +9,7 @@ def soupobj(htmlcontent,inputlocal,inputurl):
 
     title_tag = soupobj.find("title").text
 
-    page_title = listdownloader.page_title(title_tag,inputurl)
+    page_title = listdownloader.page_title(title_tag)
 
     htmlsavelocal = str(inputlocal+'\\'+str(page_title)+'\\'+str(page_title)+'.html')
 
